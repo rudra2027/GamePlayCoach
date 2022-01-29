@@ -1,0 +1,66 @@
+db.addresses.find().pretty()
+db.addresses.aggregate([{$project:{"restaurant_id":1,"borough":1,"cuisine":1}}])
+db.addresses.aggregate([{$project:{"restaurant_id":1,"borough":1,"name":1,"cuisine":1,"_id":0}}])
+db.addresses.aggregate([{$project:{"restaurant_id":1,"borough":1,"name":1,"address.zipcode":1,"_id":0}}])
+db.addresses.find({"borough":"Bronx"}).limit(5).pretty()
+db.addresses.find({"borough":"Bronx"}).pretty()
+db.addresses.find({"borough":"Bronx"}).skip(5).limit(5).pretty()
+db.addresses.find({grades : { $elemMatch:{"score":{$gt : 90}}}}).pretty()
+db.addresses.find({grades : { $elemMatch:{"score":{$gt : 80,$lt:100}}}}).pretty()
+db.addresses.find({"address.coord":{$lt:-95.754168}}).pretty()
+db.addresses.find({cuisine:{$ne:"American "},"grades.score":{$gt:70},"address.coord":{$lt:-65.754168}}).pretty()
+db.addresses.find({cuisine:{$ne:"American "},"grades.score":{$gt:70},"address.coord":{$lt:-65.754168}}).pretty()
+db.addresses.find({cuisine:{$ne:"American "},borough:{$ne:"Brooklyn"},"grades.grade":"A"}).sort({"cuisine":-1}).pretty()
+
+db.addresses.find({name: /^Wil/}#<as similar to Wil%(^==start)>,{restaurant_id:1,name:1,borough:1,cuisine:1}).pretty().count()/<=(3sol)//(4sol)=>/db.addresses.find({name:{$regex:"Wil"}},{restaurant_id:1,name:1,borough:1,cuisine:1}).pretty().count()
+
+db.addresses.find({name: /ces$/},{restaurant_id:1,name:1,borough:1,cuisine:1}).pretty().count()
+
+db.addresses.find({name: /Reg/},{restaurant_id:1,name:1,borough:1,cuisine:1}).pretty().count()
+
+db.addresses.find({$and:[{borough:"Bronx"},{$or:[{cuisine:"American "},{cuisine:"Chinese"}]}]}).pretty().count()
+
+db.addresses.find({"borough" :{$in :["Staten Island","Queens","Bronx","Brooklyn"]}},{restaurant_id:1,name:1,borough:1,cuisine:1}).pretty().count()
+
+db.addresses.find({"borough" :{$ne:{$in :["Staten Island","Queens","Bronx","Brooklyn"]}}}, { "restaurant_id" : 1, "name":1,"borough":1, "cuisine" :1 }).count()<wrong approach>////<Right Approach>
+db.addresses.find({"borough" :{$nin :["Staten Island","Queens","Bronx","Brooklyn"]}}, { "restaurant_id" : 1, "name":1,"borough":1, "cuisine" :1 }).count()
+
+
+db.addresses.find({"grades.score":{$lte:10}},{restaurant_id:1,name:1,borough:1,cuisine:1}).pretty().count()<Wrong Approach>////<Right Approach> db.addresses.find({"grades.score" :
+... { $not:
+... {$gt : 10}
+... }
+... },
+... {
+... "restaurant_id" : 1,
+... "name":1,"borough":1,
+... "cuisine" :1
+... }).count()
+
+db.addresses.find({$or:[{cuisine:{$nin:["American ","Chinees"]}},{name:/^Wil/}]}, { "restaurant_id" : 1, "name":1,"borough":1, "cuisine" :1 }).count()
+
+db.addresses.find({$and:[{"grades.grade":"A"},{"grades.score":11},{"grades.date":ISODate("2014-08-11T00:00:00Z")}]},{"restaurant_id" : 1,"name":1,"borough":1,"cuisine" :1} ).pretty().count()
+
+
+db.addresses.find({$and:[{"grades.1.grade":"A"},{"grades.1.score":9},{"grades.1.date":ISODate("2014-08-11T00:00:00Z")}]},{"restaurant_id" : 1,"name":1,"borough":1,"cuisine" :1} ).pretty().count()
+
+db.addresses.find({"address.coord.1":{$gt:42,$lte:52}},{"coord":1,"restaurant_id" : 1,"name":1,"borough":1,"cuisine" :1} ).pretty().count()
+
+db.addresses.find().sort({"name":1}).pretty()
+
+db.addresses.find().sort({"name":-1}).pretty()
+
+db.addresses.find().sort({"name":1,"borough":-1}).pretty()
+
+db.addresses.find({"address.street" :{ $exists : true }})
+
+db.restaurants.find({"address.coord":{$type : 1}})
+
+db.addresses.find({"grades.score" :{$mod : [7,0]} }).count()
+
+
+
+
+db.addresses.find({"name":/mon/}).count()<Wrong>////db.addresses.find({ name :{ $regex : "mon"}}).count()<wrong>////db.addresses.find({ name :{ $regex : "mon.*", $options: "i" }}).count()<Right>
+
+db.addresses.find({ name :{ $regex : /^Mad/i, }}).count()
