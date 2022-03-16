@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+   
+    <bean id = "Question" class = "assignment2.Question">
+   <property name="questionId" value="12"/>
+      <property name="question" value="Name Some Countries:"/>
+         <property name="answers" ref="Answers"/>
+    
+   </bean>
+      <bean id = "Answers" class = "assignment2.Answers">
+      <property name="answerlist">
+       <list>
+            <value>India</value>
+            <value>Uae</value>
+            <value>Usa</value>
+            <value>Usa</value>
+         </list>
+      </property>
+       <property name="answerset">
+       <set>
+            <value>Israile</value>
+            <value>Ukraine</value>
+            <value>Uganda</value>
+            <value>Uzbekistan</value>
+         </set>
+      </property>
+        <property name="answermap">
+       <map>
+            <entry key = "1" value = "India"/>
+            <entry key = "2" value = "SriLanka"/>
+            <entry key = "3" value = "Nepal"/>
+            <entry key = "4" value = "Bangladesh"/>
+         </map>
+      </property>
+   </bean>
+     
+
+   
+</beans>

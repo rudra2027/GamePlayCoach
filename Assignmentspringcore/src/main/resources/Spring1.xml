@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+ <beans> 
+ <bean id="show" class="Customer">
+ <property name="custid" value="01"/>
+  <property name="custname" value="adarsh"/> 
+  <property name="custcontact" value="95892"/>
+  <property name="custaddress" ref="add"/>
+ </bean>   
+ <bean id="add" class="Address">
+ <property name="street" value="Adarsh Nagar"/>
+  <property name="city" value="Hoshangabad"/> 
+  <property name="state" value="MAdhya Pradesh"/>
+  <property name="zip" value="461001"/>
+  <property name="country" value="India"/>
+ </bean>   
+ 
+ <bean id="show1" class = "Customer">
+        <constructor-arg  type ="int" value="654"/>
+        <constructor-arg value="Virat"/>
+        <constructor-arg value="6548484"/>
+        <constructor-arg ref="custAddress"/>
+    </bean>
+    <bean id="custAddress" class="Address">
+    <constructor-arg value="Welcome"/>
+        <constructor-arg value="World"/> 
+        <constructor-arg value="Punjab"/>
+        <constructor-arg value="12356" />
+        <constructor-arg value="India"/>
+    </bean>
+
+    
+ </beans>

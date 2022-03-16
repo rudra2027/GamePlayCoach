@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns = "http://www.springframework.org/schema/beans"
+       xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context = "http://www.springframework.org/schema/context"
+       xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+        <bean id="BA1" class="assignment4.BankAccount">
+            <constructor-arg type = "long" value="1245"/>
+            <constructor-arg value="adarsh"/>
+            <constructor-arg value="Cc"/>
+            <constructor-arg type="double" value="23654"/>
+
+        </bean>
+    <bean id="BA2" class="assignment4.BankAccount">
+        <constructor-arg type = "long" value="2356"/>
+        <constructor-arg value="gour"/>
+        <constructor-arg value="Sv"/>
+        <constructor-arg type="double" value="25600"/>
+
+    </bean>
+
+    <context:annotation-config/> <context:component-scan base-package="assignment4"/>
+    <context:annotation-config/>
+    </beans>
